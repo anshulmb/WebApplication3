@@ -28,8 +28,11 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
+
+
+- task: NuGetCommand@2
   inputs:
-    azureSubscription: 'Pay-As-You-Go(cae0c97a-074f-470f-921a-e09250a693a5)'
-    command: 'publish'
-    publishWebProjects: true
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '3b3757c5-18d3-41f1-91e8-1d3d2a2b4745/0bd00307-1d43-46af-8f23-38103864ee23'
